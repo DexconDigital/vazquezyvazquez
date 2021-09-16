@@ -1,0 +1,284 @@
+$(document).ready(function() {
+    $.ajax({
+        url: "http://www.simi-api.com/ApiSimiweb/response/v21/filtroInmueble/limite/0/total/100/departamento/0/ciudad/0/zona/0/barrio/0/tipoInm/0/tipOper/0/areamin/0/areamax/0/valmin/0/valmax/0/campo/0/order/0/banios/0/alcobas/0/garajes/0",
+        type: "GET",
+        cache: true,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader(
+                "Authorization",
+                "Basic " +
+                btoa("Authorization:9Gx1hhqSeQnEOWMF4FJzcrbDo6k1MD7LUGVLimA4-289")
+            );
+        },
+        dataType: "json",
+        success: function(data) {
+            var res = " ";
+
+            if (data == 0) {
+                res += "No hay Inmuebles destacados";
+                $("#result").text(res);
+            } else {
+                var j = 0;
+                for (var i in data) {
+                    if (parseInt(data[i].Canon) > 0) {
+                        res +=
+                            '<div class="col-sm-6 col-md-3 p0">' +
+                            '<div class="box-two proerty-item">' +
+                            '<div class="item-thumb">' +
+                            '<a href="detalle_inmuebles.php?dt=' +
+                            data[i].Codigo_Inmueble +
+                            '" target="_blank"><img id="img-item1" src="';
+                        if (data[i].foto1.localeCompare("") != 0) {
+                            res += data[i].foto1;
+                        } else {
+                            res += "assets/img/no_image.png";
+                        }
+                        res += '"></a>' +
+                            '<span class="badge span-top">' + data[i].Gestion + '</span><span class="badge span-top1">' + data[i].Tipo_Inmueble +
+                            '</span>' +
+                            "</div>" +
+                            '<div class="item-entry overflow">' +
+                            '<h5 style="margin-left:5px;"><span class="fa fa-map-marker"></span> ' + data[i].Ciudad + ' - ' + data[i].Barrio + '</h5>' +
+                            '<div class="dot-hr"></div>' +
+                            '<span class="pull-left" style="padding: 6px;"><span><label>' + data[i].banios + '</label> <i class="fa fa-bath" aria-hidden="true"></i>&nbsp; <label>' +
+                            data[i].Alcobas + '</label> <i class="fa fa-bed" aria-hidden="true"></i> ' + data[i].AreaConstruida + ' M<sup>2</sup></span> ' +
+                            " </span>" +
+                            '<span class="proerty-price pull-right" style="padding: 6px;"> $' +
+                            data[i].Canon +
+                            "</span>" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>";
+                        j++;
+                        if (j == 4) {
+                            break;
+                        }
+                    }
+                }
+                $(".proerty-th-1").html(res);
+            }
+        }
+    });
+    $.ajax({
+        url: "http://www.simi-api.com/response/v21/filtroInmueble/limite/0/total/100/departamento/0/ciudad/0/zona/0/barrio/0/tipoInm/0/tipOper/0/areamin/0/areamax/0/valmin/0/valmax/0/campo/0/order/0/banios/0/alcobas/0/garajes/0",
+        type: "GET",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader(
+                "Authorization",
+                "Basic " +
+                btoa("Authorization:9Gx1hhqSeQnEOWMF4FJzcrbDo6k1MD7LUGVLimA4-289")
+            );
+        },
+        dataType: "json",
+        success: function(data) {
+            var res = " ";
+
+            if (data == '"Sin resultados"') {
+                res += "No hay Inmuebles destacados";
+                $("#result").text(res);
+            } else {
+                var j = 0;
+                for (var i in data) {
+                    if (parseInt(data[i].Canon) > 0) {
+                        res +=
+                            '<div class="col-sm-6 col-md-4 p0">' +
+                            '<div class="box-two proerty-item">' +
+                            '<div class="item-thumb">' +
+                            '<a href="detalle_inmuebles.php?dt=' + data[i].Codigo_Inmueble + '" target="_blank">' +
+                            '<img id="img-item" src="';
+                        if (data[i].foto1.localeCompare("") != 0) {
+                            res += data[i].foto1;
+                        } else {
+                            res += "assets/img/no_image.png";
+                        }
+                        res += '"></a>' +
+                            '<span class="badge span-top">' + data[i].Gestion + '</span><span class="badge span-top1">' + data[i].Tipo_Inmueble +
+                            '</span>' +
+                            "</div>" +
+                            '<div class="item-entry overflow">' +
+                            '<h5 style="margin-left:5px;"><span class="fa fa-map-marker"></span> ' + data[i].Ciudad + ' - ' + data[i].Barrio + '</h5>' +
+                            '<div class="dot-hr"></div>' +
+                            '<span class="pull-left" style="padding: 6px;"><span><label>' + data[i].banios + '</label> <i class="fa fa-bath" aria-hidden="true"></i>&nbsp; <label>' +
+                            data[i].Alcobas + '</label> <i class="fa fa-bed" aria-hidden="true"></i> ' + data[i].AreaConstruida + ' M<sup>2</sup></span> ' +
+                            " </span>" +
+                            '<span class="proerty-price pull-right" style="padding: 6px;"> $' +
+                            data[i].Canon +
+                            "</span>" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>";
+                        j++;
+                        if (j == 3) {
+                            break;
+                        }
+                    }
+                }
+                //console.log(Object.keys(informacion).length);
+                $(".proerty-th-2").html(res);
+            }
+        }
+    });
+    //guarda el id de los departamentos
+    var res = new Array();
+
+    //peticion departamentos
+    $.ajax({
+        url: "http://www.simi-api.com/ApiSimiweb/response/v2/departamento/",
+        type: "GET",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader(
+                "Authorization",
+                "Basic " +
+                btoa("Authorization:9Gx1hhqSeQnEOWMF4FJzcrbDo6k1MD7LUGVLimA4-289")
+            );
+        },
+        dataType: "html",
+        success: function(data) {
+            var datos = data.trim();
+
+            if (datos.localeCompare('"Sin resultados"') == 0) {
+                res += "No hay Inmuebles destacados";
+            } else {
+                var informacion = JSON.parse(data);
+                for (var i = 0; i < informacion.length; i++) {
+                    res[i] = informacion[i].id;
+                }
+            }
+        }
+    });
+
+    //peticion ciudades
+    $.ajax({
+        url: "http://www.simi-api.com/ApiSimiweb/response/v2/ciudad/idDepartamento/res[0]",
+        type: "GET",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader(
+                "Authorization",
+                "Basic " +
+                btoa("Authorization:9Gx1hhqSeQnEOWMF4FJzcrbDo6k1MD7LUGVLimA4-289")
+            );
+        },
+        dataType: "html",
+        success: function(data) {
+            var datos = data.trim();
+
+            if (datos.localeCompare('"Sin resultados"') == 0) {
+                res += "No hay Inmuebles destacados";
+            } else {
+                var resultado = "<option value='0'>.::Ciudad::.</option>";
+                var informacion = JSON.parse(data);
+                for (var i = 0; i < informacion.length; i++) {
+                    resultado +=
+                        '<option value="' +
+                        informacion[i].id +
+                        '">' +
+                        informacion[i].nombre +
+                        "</option>";
+                }
+                $("#ciudad").html(resultado);
+            }
+        }
+    });
+
+    $.ajax({
+        url: "http://www.simi-api.com/ApiSimiweb/response/tipoInmuebles/",
+        type: "GET",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader(
+                "Authorization",
+                "Basic " +
+                btoa("Authorization:9Gx1hhqSeQnEOWMF4FJzcrbDo6k1MD7LUGVLimA4-289")
+            );
+        },
+        dataType: "html",
+        success: function(data) {
+            var datos = data.trim();
+
+            if (datos.localeCompare('"Sin resultados"') == 0) {
+                res += "No hay Inmuebles destacados";
+            } else {
+                var resultado = "<option value='0'>.::Tipo Inmueble::.</option>";
+                var informacion = JSON.parse(data);
+                for (var i = 0; i < informacion.length; i++) {
+                    resultado +=
+                        '<option value="' +
+                        informacion[i].idTipoInm +
+                        '">' +
+                        informacion[i].Nombre +
+                        "</option>";
+                }
+                $("#inmueble").html(resultado);
+            }
+        }
+    });
+
+        $("#ciudad").change(function() {
+        var res_ciudad =  $("#ciudad option:selected").val();
+        console.log(res_ciudad);
+        $.ajax({
+            url: "http://www.simi-api.com/ApiSimiweb/response/v2/zonas/idCiudad/" +
+                res_ciudad +
+                "",
+            type: "GET",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader(
+                    "Authorization",
+                    "Basic " +
+                    btoa("Authorization:9Gx1hhqSeQnEOWMF4FJzcrbDo6k1MD7LUGVLimA4-289")
+                );
+            },
+            dataType: "html",
+            success: function(data) {
+                var datos = data.trim();
+
+                if (datos.localeCompare('"Sin resultados"') == 0) {
+                    console.log("No hay zona");
+                } else {
+                    var resultado = "<option value='0'>.::Zona::.</option>";
+                    var informacion = JSON.parse(data);
+                    for (var i = 0; i < informacion.length; i++) {
+                        resultado +=
+                            '<option value="' +
+                            informacion[i].id +
+                            '">' +
+                            informacion[i].nombre +
+                            "</option>";
+                    }
+                    $("#zona").html(resultado);
+                }
+            }
+        });
+    });
+
+    $.ajax({
+        url: "http://www.simi-api.com/ApiSimiweb/response/gestion/",
+        type: "GET",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader(
+                "Authorization",
+                "Basic " +
+                btoa("Authorization:9Gx1hhqSeQnEOWMF4FJzcrbDo6k1MD7LUGVLimA4-289")
+            );
+        },
+        dataType: "html",
+        success: function(data) {
+            var datos = data.trim();
+
+            if (datos.localeCompare('"Sin resultados"') == 0) {
+                console.log("No hay zona");
+            } else {
+                var resultado = "<option value='0'>.::Gestion::.</option>";
+                var informacion = JSON.parse(data);
+                for (var i = 0; i < informacion.length; i++) {
+                    resultado +=
+                        '<option value="' +
+                        informacion[i].idGestion +
+                        '">' +
+                        informacion[i].Nombre +
+                        "</option>";
+                }
+                $("#contrato").html(resultado);
+            }
+        }
+    });
+});
