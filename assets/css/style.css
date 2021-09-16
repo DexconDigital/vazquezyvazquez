@@ -3686,7 +3686,7 @@ ul.footer-adress li {
 
 ul.footer-blog li {
     width: 100%;
-    display: table;
+    display: inline-table;
     margin-bottom: -20px;
 }
 

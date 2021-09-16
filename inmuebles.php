@@ -38,7 +38,7 @@ $zona = $_GET["zo"];
     <link rel="stylesheet" href="assets/css/owl.carousel.css">
     <link rel="stylesheet" href="assets/css/owl.theme.css">
     <link rel="stylesheet" href="assets/css/owl.transitions.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=1">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <style type="text/css">
         #imagen {
@@ -196,7 +196,7 @@ $zona = $_GET["zo"];
     <script src="assets/js/icheck.min.js"></script>
     <script src="assets/js/price-range.js"></script>
 
-    <script src="assets/js/main.js?v=1"></script>
+    <script src="assets/js/main.js?v=2"></script>
     <script src="assets/js/inmuebles.js"></script>
     
     <?php echo "<script> var gs ='" . $gestion . "';</script>"; ?>

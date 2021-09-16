@@ -35,7 +35,7 @@ $codigo = $_GET["dt"];
     <link rel="stylesheet" href="assets/css/owl.carousel.css">
     <link rel="stylesheet" href="assets/css/owl.theme.css">
     <link rel="stylesheet" href="assets/css/owl.transitions.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=1">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <style type="text/css">
         #imagen {
@@ -223,7 +223,7 @@ $codigo = $_GET["dt"];
     <script src="assets/js/icheck.min.js"></script>
     <script src="assets/js/price-range.js"></script>
 
-    <script src="assets/js/main.js?v=1"></script>
+    <script src="assets/js/main.js?v=2"></script>
     <script src="assets/js/style.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBy3eC2yGn79AX-GzatxdgPZB1PEiBWHuo&callback=initMap"></script>
     <?php echo "<script> var x ='" . $codigo . "';</script>"; ?>
